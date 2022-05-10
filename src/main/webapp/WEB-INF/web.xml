@@ -14,4 +14,21 @@
     <url-pattern>/hola</url-pattern>
   </servlet-mapping>
 
+  <!--Conext params-->
+
+  <context-param>
+    <param-name>dbUrl</param-name>
+    <param-value>jdbc:postgresql://localhost:5432/bootcamp_market</param-value>
+  </context-param>
+  <context-param>
+    <param-name>dbUser</param-name>
+    <param-value>postgres</param-value>
+  </context-param>
+  <context-param>
+    <param-name>dbPassword</param-name>
+    <param-value>postgres</param-value>
+  </context-param>
+
+  <!--Conext params-->
+
 </web-app>
