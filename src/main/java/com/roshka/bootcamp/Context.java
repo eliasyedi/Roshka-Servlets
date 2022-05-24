@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.PrintWriter;
 import java.sql.*;
+import java.util.Enumeration;
 
 @WebServlet("/context")
 public class Context extends HttpServlet {
@@ -16,6 +17,15 @@ public class Context extends HttpServlet {
 
     public void init(ServletConfig config) {
         ServletContext context = config.getServletContext();
+
+        //mostramos los parametros del contexto
+        Enumeration<String> attributeNames = context.getInitParameterNames();
+
+        while(attributeNames.hasMoreElements()) {
+            String eachName = attributeNames.nextElement();
+            System.out.println("Context Param name: " + eachName);
+        }
+
         try {
             Class.forName("org.postgresql.Driver");
             connection = DriverManager
