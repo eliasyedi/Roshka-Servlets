@@ -1,5 +1,7 @@
 package com.roshka.bootcamp;
 
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.annotation.WebInitParam;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -8,18 +10,22 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 import java.sql.*;
 
-@WebServlet("/conexion")
+@WebServlet(urlPatterns = "/conexion", initParams = {@WebInitParam(name = "dbUrl", value = "jdbc:postgresql://localhost:5432/bootcamp_market"),
+        @WebInitParam(name = "dbUser", value = "postgres"),
+        @WebInitParam(name = "dbPassword", value = "postgres"),
+})
+
 public class BD extends HttpServlet {
     Connection connection;
-    public void init() {
+
+    public void init(ServletConfig config) {
         try {
             Class.forName("org.postgresql.Driver");
             connection = DriverManager
-                    .getConnection("jdbc:postgresql://localhost:5432/bootcamp_market",
-                            "postgres", "postgres");
+                    .getConnection(config.getInitParameter("dbUrl"), config.getInitParameter("dbUser"), config.getInitParameter("dbPassword"));
         } catch (Exception e) {
             e.printStackTrace();
-            System.err.println(e.getClass().getName()+": "+e.getMessage());
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
     }
@@ -43,9 +49,9 @@ public class BD extends HttpServlet {
                 String apellido = rs.getString("apellido");
                 int cantidad = rs.getInt("Cantidad_factura");
 
-                out.println("<p>NOMBRE = \\" + nombre + "</p>");
-                out.println("<p>APELLIDO = \\" + apellido + "</p>");
-                out.println("<p>CANTIDAD FACTURA = \\" + cantidad + "</p>");
+                out.println("<p>NOMBRE = " + nombre + "</p>");
+                out.println("<p>APELLIDO = " + apellido + "</p>");
+                out.println("<p>CANTIDAD FACTURA = " + cantidad + "</p>");
 
             }
             out.println("</body>");
