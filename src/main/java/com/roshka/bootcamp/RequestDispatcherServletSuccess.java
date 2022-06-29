@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet("/dispatcher")
+@WebServlet("/success")
 public class RequestDispatcherServletSuccess extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

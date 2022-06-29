@@ -23,14 +23,18 @@ public class RequestDispatcherServlet extends HttpServlet {
 
         if (username.equals("bootcamp") && password.equals("bootcamp")) {
             // forward
-            RequestDispatcher dispatcher = request.getRequestDispatcher("RequestDispatcherServletSuccess");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/success");
             dispatcher.forward(request, response);
         } else {
-            //include
-            out.print("Usuario invalido!");
-            RequestDispatcher rd = request.getRequestDispatcher("/login.html");
-            rd.include(request, response);
+            RequestDispatcher rd = request.getRequestDispatcher("login-try.html");
+            rd.forward(request, response);
         }
 
+    }
+
+    @Override
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher rd = request.getRequestDispatcher("/login.html");
+        rd.forward(request, response);
     }
 }
