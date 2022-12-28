@@ -22,14 +22,13 @@ public class InsertionCliente extends DataB{
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PrintWriter pr = response.getWriter();
-        response.setContentType("text/plain");
+        response.setContentType("text/html");
         String nombre = request.getParameter("nombre");
         String apellido = request.getParameter("apellido");
         String ruc = request.getParameter("ruc");
 
         if(nombre.length()==0 || apellido.length()==0 || ruc.length()==0){
-            RequestDispatcher rd = request.getRequestDispatcher("formCliente.html");
+            RequestDispatcher rd = request.getRequestDispatcher("/formCliente.html");
             rd.forward(request, response);
         }
 
@@ -45,6 +44,7 @@ public class InsertionCliente extends DataB{
             System.err.println(e.getClass().getName() + e.getMessage());
         }
 
-
+        RequestDispatcher rd = request.getRequestDispatcher("/formCliente.html");
+        rd.forward(request, response);
     }
 }
