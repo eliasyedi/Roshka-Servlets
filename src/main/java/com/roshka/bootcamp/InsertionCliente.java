@@ -28,8 +28,11 @@ public class InsertionCliente extends DataB{
         String apellido = request.getParameter("apellido");
         String ruc = request.getParameter("ruc");
 
-        if(nombre.length()==0 || apellido.length()==0 || ruc.length()==0)
-            return;
+        if(nombre.length()==0 || apellido.length()==0 || ruc.length()==0){
+            RequestDispatcher rd = request.getRequestDispatcher("formCliente.html");
+            rd.forward(request, response);
+        }
+
         try{
             PreparedStatement p = connection.prepareStatement("INSERT INTO cliente (id,nombre, apellido , nro_cedula) VALUES (DEFAULT,?,?,?);");
             p.setString(1,nombre);
